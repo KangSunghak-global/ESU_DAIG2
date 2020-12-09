@@ -85,7 +85,7 @@ class MyWindow(QMainWindow, form_class):
             self.count += 1
             self.textEdit_2.setText("Count :" + str(self.count))
         print(self.count)
-        # self.self.progressBar.setValue(step)
+        self.progressBar.setValue(self.count)
 
     def VersionRead_click(self):
         data = ComControlService(SW_VERSION)
@@ -104,16 +104,22 @@ class MyWindow(QMainWindow, form_class):
         self.textEdit_2.setText("MCUversion")
 
     def Sw1Write_click(self):
-        data = ComControlService(SW1_WRITE)
+        #data = ComControlService(SW1_WRITE)
         self.textEdit_2.setText("Switch1 Flash")
         time.sleep(1)
-        self.timer.start()
+        if self.timer.isActive():
+            self.textEdit.setText("Please wait until ending of count")
+        else:
+            self.timer.start()
 
     def Sw2Write_click(self):
-        data = ComControlService(SW2_WRITE)
+        #data = ComControlService(SW2_WRITE)
         self.textEdit_2.setText("Switch2 Flash")
         time.sleep(1)
-        self.timer.start()
+        if self.timer.isActive():
+            self.textEdit.setText("Please wait until ending of count")
+        else:
+            self.timer.start()
 
     def Sw1Read_click(self):
         data = ComControlService(SW1_VER_READ)
